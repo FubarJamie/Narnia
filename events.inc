@@ -4,8 +4,6 @@ public void OnPlayerConnect(int client, bool connectMessage) {
 
 	if (!IsValidClient(client))
 		return;
-
-	GetPlayersRank(client);
 	GetPlayersPoints(client, connectMessage);
 	
 }
@@ -37,11 +35,11 @@ public Action Player_Spawned(Event event, const char[] name, bool dontBroadcast)
 		vPos[2] += 12.5;
 	}
 	
-	if (g_HideSave[client]) {
+	/*if (g_HideSave[client]) {
 		g_Hide[client] = true;
 		g_HideSave[client] = false;
 		PrintToChat(client, " [\x03SourceRuns\x01] - Players are now [\x09HIDDEN\x01]");
-	}
+	}*/
 	
 }
 
@@ -257,11 +255,11 @@ public void Player_Death(Handle event, const char[] name, bool dontBroadcast) {
 	
 	g_TimerEnabled[client] = false;
 	
-	if (g_Hide[client]) {
+	/*if (g_Hide[client]) {
 		g_Hide[client] = false;
 		g_HideSave[client] = true;
 		PrintToChat(client, " [\x03SourceRuns\x01] - Players are now [\x09VISIBLE\x01]");
-	}
+	}*/
 	
 }
 

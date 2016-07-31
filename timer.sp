@@ -38,7 +38,7 @@ public void OnPluginStart() {
 	for (int i = 1; i < MaxClients; i++) {
 		if (IsValidClient(i)) {
 			OnPlayerConnect(i, false);
-			CreatePlayer(i);
+			OnClientPutInServer(i);
 			g_ExtraLife[i] = true;
 		}
 	}
@@ -178,10 +178,10 @@ public void OnPluginStart() {
 
 public Action Command_HidePlayers(int client, int args) {
 	
-	if ( !(IsValidClient(client, true)) ) {
+	/*if ( !(IsValidClient(client, true)) ) {
 		PrintToChat(client, " [\x03SourceRuns\x01] - You cannot run this command while dead.");
 		return Plugin_Handled;
-	}
+	}*/
 	
 	if (g_Hide[client]) {
 		g_Hide[client] = false;
@@ -201,7 +201,7 @@ public Action Command_HidePlayers(int client, int args) {
 
 public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3], float angles[3], int &weapon, int &subtype, int &cmdnum, int &tickcount, int &seed, int mouse[2]) {
 
-	if(!Client_IsValid(client) && !Client_IsIngame(client) && !IsPlayerAlive(client)) {
+	if(!Client_IsValid(client) && !IsPlayerAlive(client)) {
 		return Plugin_Continue;
 	}
 	
@@ -385,7 +385,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 
 public Action Hook_SetTransmit(int entity, int client) 
 { 
-    if (client != entity && (0 < entity <= MaxClients) && g_Hide[client]) 
+    if (client != entity && (0 < entity <= MaxClients) && g_Hide[client] && IsPlayerAlive(client)) 
         return Plugin_Handled; 
      
     return Plugin_Continue; 

@@ -196,7 +196,6 @@ char g_ClanTag[100][64];
 char g_ChatPrefix[100][64];
 
 bool g_Hide[MAXPLAYERS+1] = {false, ...};
-bool g_HideSave[MAXPLAYERS + 1] =  { false, ... };
 bool g_HideHud[MAXPLAYERS + 1] =  { false, ... };
 
 //cvars
