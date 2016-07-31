@@ -223,7 +223,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		ForcePlayerSuicide(client);
 	}
 	
-	if (InsideZoneByType(client, Zone_Start)) {
+	/*if (InsideZoneByType(client, Zone_Start)) {
 		float maxSpeed = 600.0;
 		
 		float gen = Math_GetRandomFloat(-20.0, 20.0);
@@ -235,7 +235,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		}
 		
 		CheckVelocity(client, 1, maxSpeed);
-	}
+	}*/
 	
 	if ( InsideZoneByType(client, Zone_Start) && g_ExtraLife[client] && (GetClientHealth(client) < 100) ) {
 		SetEntityHealth(client, 100);
