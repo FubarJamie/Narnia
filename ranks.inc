@@ -665,7 +665,7 @@ public void UpdateEpoch(int client) {
 	
 	int collected = 0;
 	
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (!IsValidClient(i))
 			continue;
 		

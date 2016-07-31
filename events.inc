@@ -210,7 +210,7 @@ public void OnMapStart() {
 	ServerCommand("sm_cvar sv_enablebunnyhopping 1");
 	//ServerCommand("sm_cvar mp_weapons_allow_map_placed 2");
 	
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		
 		if (!IsValidClient(i)) {
 			continue;
@@ -225,7 +225,7 @@ public void OnMapStart() {
 		LogMessage("SQL_UpdateMaxRank_Callback");
 	#endif
 	
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (!IsValidClient(i))
 			continue;
 		

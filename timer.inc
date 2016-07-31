@@ -468,7 +468,7 @@ public void GetCurrentRecords() {
 	
 	// Get top records for each player and styles.
 	
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (!IsValidClient(i)) {
 			continue;
 		}
