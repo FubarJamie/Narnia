@@ -227,7 +227,8 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 	if (InsideZoneByType(client, Zone_Start)) {
 		if(gCv_prespeed.FloatValue>0.0)
 		{
-			int maxSpeed = gCv_prespeed.FloatValue;
+			
+			float maxSpeed = gCv_prespeed.FloatValue;
 			float gen = Math_GetRandomFloat(-20.0, 20.0);
 		
 			if (gen >= 0) {
