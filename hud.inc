@@ -266,7 +266,7 @@ public void UpdateHUD(int client) {
 			FormatEx(sHintText, sizeof(sHintText), "<font size='16'>");
 
 			Format(sHintText, sizeof(sHintText), "%sTime: %s", sHintText, time);
-			Format(sHintText, sizeof(sHintText), "%s   		", sHintText);
+			Format(sHintText, sizeof(sHintText), "%s  		", sHintText);
 	
 			//Format(sHintText, sizeof(sHintText), "%sSpeed: %s (%i)", sHintText, speed, percentageSpeed);
 			Format(sHintText, sizeof(sHintText), "%sSpeed: %s", sHintText, speed);

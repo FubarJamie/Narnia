@@ -64,7 +64,12 @@ stock void FormatSeconds(float time, char[] newtime, int newtimesize, bool preci
 		} else {
 			Format(cSeconds, sizeof(cSeconds), "%i", iSeconds);
 		}
-		Format(newtime, newtimesize, "%i:%s.%i", iMinutes, cSeconds, RoundToFloor(fSeconds*100));
+		
+		if (precise) {
+			Format(newtime, newtimesize, "%i:%s.%i", iMinutes, cSeconds, RoundToFloor(fSeconds*1000));
+		} else {
+			Format(newtime, newtimesize, "%i:%s.%i", iMinutes, cSeconds, RoundToFloor(fSeconds*10));
+		}
 	} else if (iSeconds >= 1) {
 		if (precise) {
 			Format(newtime, newtimesize, "%i.%i", iSeconds, RoundToFloor(fSeconds*1000));
