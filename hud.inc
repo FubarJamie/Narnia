@@ -138,7 +138,7 @@ public void UpdateHUD(int client) {
 		}
 	    
 		if (currentspeed > 850) {
-			Format(cSpeed, 8, g_SpeedGrad[size]);
+			Format(cSpeed, 8, "#FF3F3D");
 		}
 		
 		Format(speed, sizeof(speed), "<font color='%s'>%i</font>", cSpeed, currentspeed);
