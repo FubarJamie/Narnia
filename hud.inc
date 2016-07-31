@@ -73,7 +73,7 @@ public void UpdateHUD(int client) {
 		if (fPB <= 0)
 			sPB = "N/A";
 		else
-			FormatSeconds(fPB, sPB, sizeof(sPB));
+			FormatSeconds(fPB, sPB, sizeof(sPB), false);
 			
 		Format(style, sizeof(style), "%s", g_StyleNames[view_as<BhopStyle>(g_CurrentStyle[target])]);
 		
@@ -122,33 +122,27 @@ public void UpdateHUD(int client) {
 		else
 			Format(time, sizeof(time), "<font color='%s'>%s</font>", colour2, sTime);
 		
-		char cSpeed[7];
+		char cSpeed[8];
 		int currentspeed = RoundFloat(fSpeed_New);
+	       
+		int size = sizeof(g_SpeedGrad);
+			
+		int percent = Math_GetPercentage(currentspeed, 850);
+		int percentInc = Math_GetPercentage(1, size);
 		
-		if(currentspeed < 240)
-	        Format(cSpeed, sizeof(cSpeed), "FFFFAA");
-		else if(currentspeed < 300)
-	        Format(cSpeed, sizeof(cSpeed), "FFFF88");
-		else if(currentspeed < 500)
-	        Format(cSpeed, sizeof(cSpeed), "FFFF66");
-		else if(currentspeed < 700)
-	        Format(cSpeed, sizeof(cSpeed), "FFFF44");
-		else if(currentspeed < 900)
-	        Format(cSpeed, sizeof(cSpeed), "FFFF22");
-		else if(currentspeed < 1100)
-	        Format(cSpeed, sizeof(cSpeed), "FFCC11");
-		else if(currentspeed < 1300)
-	        Format(cSpeed, sizeof(cSpeed), "FFBB00");
-		else if(currentspeed < 1500)
-	        Format(cSpeed, sizeof(cSpeed), "FF8800");
-		else
-	        Format(cSpeed, sizeof(cSpeed), "FF0000");
-	        
-		int percentageSpeed;
+		for (int i = 0; i < size; i++) {
+			if (percent <= (percentInc * (i+1))) {
+				Format(cSpeed, 8, g_SpeedGrad[i]);
+				break;
+			}
+		}
 	    
-		percentageSpeed = Math_GetPercentage(currentspeed, 850);
+		if (currentspeed > 850) {
+			Format(cSpeed, 8, g_SpeedGrad[size]);
+		}
 		
-		Format(speed, sizeof(speed), "<font color='#%s'>%i</font>", cSpeed, currentspeed);
+		Format(speed, sizeof(speed), "<font color='%s'>%i</font>", cSpeed, currentspeed);
+		
 		
 		if (g_WRTime[g_CurrentStyle[target]] <= 0.0001) {
 			Format(WR, sizeof(WR), "N/A");
@@ -266,7 +260,7 @@ public void UpdateHUD(int client) {
 			FormatEx(sHintText, sizeof(sHintText), "<font size='16'>");
 
 			Format(sHintText, sizeof(sHintText), "%sTime: %s", sHintText, time);
-			Format(sHintText, sizeof(sHintText), "%s   		", sHintText);
+			Format(sHintText, sizeof(sHintText), "%s  		", sHintText);
 	
 			//Format(sHintText, sizeof(sHintText), "%sSpeed: %s (%i)", sHintText, speed, percentageSpeed);
 			Format(sHintText, sizeof(sHintText), "%sSpeed: %s", sHintText, speed);
