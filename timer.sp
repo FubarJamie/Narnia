@@ -177,6 +177,11 @@ public void OnPluginStart() {
 
 public Action Command_HidePlayers(int client, int args) {
 	
+	if ( !(IsValidClient(client, true)) ) {
+		PrintToChat(client, " [\x03SourceRuns\x01] - You cannot run this command while dead.");
+		return Plugin_Handled;
+	}
+	
 	if (g_Hide[client]) {
 		g_Hide[client] = false;
 		PrintToChat(client, " [\x03SourceRuns\x01] - Players are now [\x09VISIBLE\x01]");
