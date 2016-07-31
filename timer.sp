@@ -35,7 +35,7 @@ public void OnPluginStart() {
 	SQL_DBConnect();
 	GetCurrentMap(g_Map, 128);
 	
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (IsValidClient(i)) {
 			OnPlayerConnect(i, false);
 			CreatePlayer(i);
@@ -169,6 +169,7 @@ public void OnPluginStart() {
 	RegConsoleCmd("sm_hud", Command_HideHud, "Disable/Enable your hud!");
 	
 	//gCV_ZoneStyle = CreateConVar("shavit_zones_style", "0", "Style for mapzone drawing.\n0 - 3D box\n1 - 2D box");
+	gCv_prespeed = CreateConVar("timer_prespeed", "0.0", "0.0 for no prespeed or anything else for prespeed", _, true, 0.0);
 	//HookConVarChange(gCV_ZoneStyle, OnConVarChanged);
 	
 	AutoExecConfig();
@@ -223,23 +224,30 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		ForcePlayerSuicide(client);
 	}
 	
-	/*if (InsideZoneByType(client, Zone_Start)) {
-		float maxSpeed = 600.0;
+	if (InsideZoneByType(client, Zone_Start)) {
+		if(gCv_prespeed.FloatValue>0.0)
+		{
+			int maxSpeed = gCv_prespeed.FloatValue;
+			float gen = Math_GetRandomFloat(-20.0, 20.0);
 		
-		float gen = Math_GetRandomFloat(-20.0, 20.0);
-		
-		if (gen >= 0) {
-			maxSpeed += gen;
-		} else {
-			maxSpeed -= gen;
+			if (gen >= 0) {
+				maxSpeed += gen;
+			} else {
+				maxSpeed -= gen;
+			}
+			
+			CheckVelocity(client, 1, maxSpeed);
 		}
 		
-		CheckVelocity(client, 1, maxSpeed);
-	}*/
-	
-	if ( InsideZoneByType(client, Zone_Start) && g_ExtraLife[client] && (GetClientHealth(client) < 100) ) {
-		SetEntityHealth(client, 100);
-		g_ExtraLife[client] = false;
+		if(g_ExtraLife[client] && (GetClientHealth(client) < 100))
+		{
+			SetEntityHealth(client, 100);
+			g_ExtraLife[client] = false;
+		}
+		
+		//World record
+		ResumeTimer(client);
+		StartTimer(client);
 	}
 	
 	/*************************************************************************************************************************************************************************
@@ -313,11 +321,6 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 	/*************************************************************************************************************************************************************************
 																					World Record
 	*************************************************************************************************************************************************************************/
-	
-	if (InsideZoneByType(client, Zone_Start)) {
-		ResumeTimer(client);
-		StartTimer(client);
-	}
 	
 	if(g_TimerEnabled[client])
 	{

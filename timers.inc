@@ -6,7 +6,7 @@ public Action UpdateMaxRank_Timer(Handle Timer) {
 		LogMessage("SQL_UpdateMaxRank_Callback");
 	#endif
 	
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (!IsValidClient(i, true))
 			continue;
 			
@@ -18,7 +18,7 @@ public Action UpdateMaxRank_Timer(Handle Timer) {
 
 public Action UpdateRealTime_Timer(Handle Timer) {
 
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (!IsValidClient(i, true))
 			continue;
 		
@@ -29,7 +29,7 @@ public Action UpdateRealTime_Timer(Handle Timer) {
 }
 
 public Action JumpCheck_Timer(Handle Timer) {
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if(!IsValidClient(i, true)) 
 			break;
 		if (g_JumpIteration[i] > 1) {
@@ -42,7 +42,7 @@ public Action JumpCheck_Timer(Handle Timer) {
 }
 
 public Action UpdateHUD_Timer(Handle Timer) {
-	for (int i = 0; i < MaxClients; i++) {
+	for (int i = 1; i < MaxClients; i++) {
 		if (!IsValidClient(i))
 			continue;
 		UpdateHUD(i);
