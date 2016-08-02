@@ -8,6 +8,9 @@ public void OnPlayerConnect(int client, bool connectMessage) {
 	
 }
 
+public Action Event_RoundStart(Handle event, const char[] name, bool dontBroadcast) {
+    FixPush();
+}
 
 public Action Player_Spawned(Event event, const char[] name, bool dontBroadcast) {
 	int client = GetClientOfUserId(event.GetInt("userid"));

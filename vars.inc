@@ -24,6 +24,7 @@ enum MapZones(+=1) {
 	Zone_Block,
 	Zone_Hover,
 	Zone_Slay,
+	Zone_PushFix,
 	Zone_Count
 };
 
@@ -35,7 +36,8 @@ char g_ZoneNames[ZONE_COUNT][] = {
 	"End Zone",
 	"Block Player",
 	"Hover Zone",
-	"Slay Zone"
+	"Slay Zone",
+	"PushFix Zone"
 };
 
 int g_ZoneColours[ZONE_COUNT][4] = {
@@ -43,7 +45,8 @@ int g_ZoneColours[ZONE_COUNT][4] = {
 	{209, 0, 0, 255},   // Zone_End
 	{255, 200, 0, 0},   // Zone_Block
 	{31, 64, 255, 255}, // Zone_Hover
-	{255, 78, 255, 255} // Zone_Slay
+	{255, 78, 255, 255},// Zone_Slay
+	{255, 200, 0, 0}    // Zone_Block
 };
 
 // Bhop styles
