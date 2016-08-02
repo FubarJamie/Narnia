@@ -146,7 +146,7 @@ public void SQL_CheckPlayer_Callback(Handle owner, Handle handle, const char[] e
 		if (SQL_FetchInt(handle, 0) == 0) {
 			
 			CPrintToChatAll("Welcome {BLUE}%N{DEFAULT} to the server!", client);
-			CPrintToChat(client, "Feel free to join our steam group at fsociety.community!");
+			CPrintToChat(client, "{YELLOW}Feel free to join our steam group at sourceruns.com!");
 
 			char auth[64];
 			GetClientAuthId(client, AuthId_SteamID64, auth, 64);
