@@ -148,7 +148,6 @@ public void UpdateHUD(int client) {
 			Format(WR, sizeof(WR), "N/A");
 		} else {
 			FormatSeconds(g_WRTime[g_CurrentStyle[target]], WR, sizeof(WR));
-			Format(WR, sizeof(WR), "<font color='#cc33ff'>%s</font>", WR);
 		}
 		
 		int specInt = GetSpectators(target);
@@ -229,11 +228,11 @@ public void UpdateHUD(int client) {
 			Format(sHintText, sizeof(sHintText), "%s	       SourceRuns", sHintText);
 			Format(sHintText, sizeof(sHintText), "%s\n", sHintText);
 			
-			Format(sHintText, sizeof(sHintText), "%sPB: %s", sHintText, sPB);
+			Format(sHintText, sizeof(sHintText), "%sPB: <font color='#0099ff'>%s</font>", sHintText, sPB);
 			Format(sHintText, sizeof(sHintText), "%s			", sHintText);
 			
 			// WR
-			Format(sHintText, sizeof(sHintText), "%sWR: %s", sHintText, WR);
+			Format(sHintText, sizeof(sHintText), "%sWR: <font color='#ff3300'>%s</font>", sHintText, WR);
 			Format(sHintText, sizeof(sHintText), "%s\n", sHintText);
 
 			Format(sHintText, sizeof(sHintText), "%sSpec: %s", sHintText, spec);
