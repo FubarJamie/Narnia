@@ -15,6 +15,7 @@
 #include "ranks"
 #include "profile"
 #include "misc"
+#include "pushfix"
 
 #pragma semicolon 1
 #pragma dynamic 131072
@@ -31,6 +32,7 @@ public Plugin myinfo = {
 public void OnPluginStart() {
 	
 	LoadRanks();
+	FixPush();
 	
 	SQL_DBConnect();
 	GetCurrentMap(g_Map, 128);
@@ -56,6 +58,7 @@ public void OnPluginStart() {
 	HookEvent("player_connect", Player_Connect, EventHookMode_Pre);
 	HookEvent("player_say", Player_Say, EventHookMode_Pre);
 	HookEvent("player_disconnect", Player_Disconnect, EventHookMode_Pre);
+	HookEvent("round_start", Event_RoundStart);
 	
 	RegConsoleCmd("say", Command_SayChat);
 	RegConsoleCmd("say_team", Command_SayChat);
