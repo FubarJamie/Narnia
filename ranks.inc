@@ -161,7 +161,7 @@ public void SQL_CheckPlayer_Callback(Handle owner, Handle handle, const char[] e
 			char sQuery[256];
 			Format(sQuery, 256, "INSERT INTO `ranks` (`id`, `points`, `lostpoints`, `lastname`, `auth`, `epoch`) VALUES (NULL, 0, 0, '%s', '%s', UNIX_TIMESTAMP(NOW()));", sEscapedName, auth);
 			
-			PrintToServer("%s", sQuery);
+			//PrintToServer("%s", sQuery);
 			
 			SQL_TQuery(g_SQLhandle, SQL_AddUser_Callback, sQuery, GetClientSerial(client));
 			#if defined SQL_DEBUG
@@ -342,7 +342,7 @@ public void SQL_GetAuth_Callback(Handle owner, Handle handle, const char[] error
 		char auth[64];
 		SQL_FetchString(handle, 0, auth, 64);
 		
-		PrintToServer("%s", auth);
+		//PrintToServer("%s", auth);
 		
 		WritePackCell(storage, GetClientSerial(client));
 		WritePackString(storage, auth);
