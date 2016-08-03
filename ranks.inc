@@ -377,11 +377,14 @@ public void SQL_GetRank_Callback(Handle owner, Handle handle, const char[] error
 	}
 	
 	CloseHandle(data);
-	
-	//
 		
 	if (SQL_FetchRow(handle)) {
 		int rank = SQL_FetchInt(handle, 0);
+		
+		if (g_OldRank[client] == rank) {
+			PrintToServer("Player has improved and not taken over anyone, so don't take points");
+			return;
+		}
 		
 		int clientBeaten = Client_FindBySteamId(auth);
 		
@@ -545,7 +548,20 @@ public void SQL_GetClientPoints_Callback(Handle owner, Handle handle, const char
 	//g_ChatPrefix[ RankByIndex(g_PlayersRank[client]) ]
 	
 	if (displayMessage) {
+		//ADMFLAG_RESERVATION
+		//ADMFLAG_GENERIC
+		/*if (GetAdminFlag(GetUserAdmin(client), ADMFLAG_RESERVATION)) {
+			//ADMFLAG_GENERIC
+			if (GetAdminFlag(GetUserAdmin(client), ADMFLAG_GENERIC)) {
+				CPrintToChatAll(" %s{BLUE}%N{DEFAULT} has joined the server with {BLUE}%i{DEFAULT} points!", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)], client, g_PlayersPoints[client]);
+			} else {
+				CPrintToChatAll(" %s{YELLOW}VIP %N{DEFAULT} has joined the server with {YELLOW}%i{DEFAULT} points!", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)], client, g_PlayersPoints[client]);
+			}
+		} else {
+			CPrintToChatAll(" %s{BLUE}%N{DEFAULT} has joined the server with {BLUE}%i{DEFAULT} points!", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)], client, g_PlayersPoints[client]);
+		}*/
 		CPrintToChatAll(" %s{BLUE}%N{DEFAULT} has joined the server with {BLUE}%i{DEFAULT} points!", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)], client, g_PlayersPoints[client]);
+		
 	}
 }
 

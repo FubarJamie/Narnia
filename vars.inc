@@ -186,6 +186,7 @@ int g_PlayersRank[MAXPLAYERS + 1] = {0, ...};
 bool g_ShowChatRank[MAXPLAYERS + 1] = {true, ...};
 
 int g_PointsGiven[Points_Size];
+int g_OldRank[MAXPLAYERS + 1];
 
 int g_WRRank[MAX_RANKS];
 int g_WRAdd[MAX_RANKS];

@@ -224,6 +224,8 @@ public void Timer_OnFinish(int client, BhopStyle sstyle, float time, int jumps)
 			FormatEx(sQuery, 512, "UPDATE playertimes SET time = '%.03f', jumps = '%d', date = CURRENT_TIMESTAMP() WHERE map = '%s' AND auth = '%s' AND style = '%d';", time, jumps, g_Map, sAuthID, style);
 		}
 		
+		g_OldRank[client] = g_RealTimePosWR[client][g_CurrentStyle[client]];
+		
 		//PrintToChatAll("%s", sQuery);
 		
 		Handle datapack = CreateDataPack();
