@@ -139,57 +139,15 @@ public Action Player_Team_Change(Event event, const char[] name, bool dontBroadc
 	return Plugin_Handled;
 }
 
-public Action Player_Say(Event event, const char[] name, bool dontBroadcast) {
-	
-	GetEventInt(event, "userid");
-	
-	char text[256];
-	
-	GetEventString(event, "text", text, 256);
-	
-	if (StrEqual(text, "", false)) return Plugin_Handled;
-	
-	CPrintToChatAll("%s", text);
-	
-	return Plugin_Handled;
-}
-
-public Action Command_SayChat(int client, int args) {
-	
-	if (args >= 1) {
-		char text[256];
-		
-		GetCmdArg(1, text, 256);
-		
-		if (StrEqual(text, "", false)) return Plugin_Handled;
-		
-		if (!IsValidClient(client)) {
-			CPrintToChatAll("%N: %s", client, text);
-			return Plugin_Handled;
-		}
-		
-		char auth[64];
-
-		GetClientAuthId(client, AuthId_SteamID64, auth, 64);
-		
-		if (StrEqual(auth, "76561198220151661")) {
-			
-			CPrintToChatAll("[{DARKRED}D{PURPLE}E{GREEN}V{DEFAULT}] %N: %s", client, text);
-			PrintToServer("[DEV] %N: %s", client, text);
-			return Plugin_Handled;
-		}
-		
-		if (g_ShowChatRank[client]) {
-			CPrintToChatAll("%s%N: %s", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)], client, text);
-		} else {
-			CPrintToChatAll("%N: %s", client, text);
-		}
-		
-		PrintToServer("%N: %s", client, text);
-		
-		return Plugin_Handled;
+public Action OnChatMessage(int &client, Handle recipients, char[] name, char[] message)
+{
+	if (g_ShowChatRank[client]) {
+		char cMessage[MAXLENGTH_INPUT];
+		Format(cMessage, MAXLENGTH_INPUT, "%s", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)]);
+		CFormat(cMessage, MAXLENGTH_INPUT);
+		Format(name, MAXLENGTH_INPUT, "%s%s", cMessage, name)
+		return Plugin_Changed;
 	}
-	
 	return Plugin_Continue;
 }
 

@@ -3,6 +3,7 @@
 #include <sdktools>
 #include <sdkhooks>
 #include <smlib>
+#include <scp>
 
 #include "vars"
 #include "events"
@@ -56,12 +57,8 @@ public void OnPluginStart() {
 	HookEvent("player_spawned", Player_Spawned);
 	HookEvent("player_team", Player_Team_Change, EventHookMode_Pre);
 	HookEvent("player_connect", Player_Connect, EventHookMode_Pre);
-	HookEvent("player_say", Player_Say, EventHookMode_Pre);
 	HookEvent("player_disconnect", Player_Disconnect, EventHookMode_Pre);
 	HookEvent("round_start", Event_RoundStart);
-	
-	RegConsoleCmd("say", Command_SayChat);
-	RegConsoleCmd("say_team", Command_SayChat);
 	
 	CreateTimer(0.1, UpdateHUD_Timer, INVALID_HANDLE, TIMER_REPEAT);
 	CreateTimer(1.0, JumpCheck_Timer, INVALID_HANDLE, TIMER_REPEAT);

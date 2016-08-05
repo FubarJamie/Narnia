@@ -55,12 +55,18 @@ public Action Command_Spectate(int client, int args) {
 		int target = FindTarget(client, name);
 		if (target == -1) {
 			PrintToChat(client, "%s Target not found %s", PREFIX, name);
-		} else if (client == target) {
-			PrintToChat(client, "%s You cannot spectate your self.", PREFIX);
-		} else {
+		}else {
 			
 			//StartFollowingPlayer(client, target);
-			
+			if(!IsPlayerAlive(target))
+			{
+				//insert print to chat about target not found
+				return Plugin_Handled;
+			}
+			if (IsPlayerAlive(client) && IsClientInGame(client))
+				ChangeClientTeam(client, 1);
+			SetEntPropEnt(client, Prop_Send, "m_hObserverTarget", target);
+			SetEntProp(client, Prop_Send, "m_iObserverMode", 4);
 			PrintToChat(client, "%s Spectating %N now", PREFIX, target);
 		}
 	}
