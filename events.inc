@@ -15,6 +15,8 @@ public Action Event_RoundStart(Handle event, const char[] name, bool dontBroadca
 public Action Player_Spawned(Event event, const char[] name, bool dontBroadcast) {
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	
+	SetEntData(client, g_offsCollisionGroup, 2, 4, true);
+	
 	g_LastZone[client] = Zone_Count;
 	g_ExtraLife[client] = true;
 

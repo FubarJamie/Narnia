@@ -92,6 +92,9 @@ Database g_SQLhandle = null;
 // Auto Bhop
 bool g_AutoBhop[MAXPLAYERS + 1] = {true, ...};
 
+// No-block
+new g_offsCollisionGroup;
+
 // Jump Detection
 bool g_Jumping[MAXPLAYERS + 1];
 int g_JumpIteration[MAXPLAYERS + 1];

@@ -34,6 +34,8 @@ public Plugin myinfo = {
 
 public void OnPluginStart() {
 	
+	g_offsCollisionGroup = FindSendPropOffs("CBaseEntity", "m_CollisionGroup");
+	
 	LoadRanks();
 	FixPush();
 	
