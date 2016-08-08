@@ -145,10 +145,10 @@ public Action OnChatMessage(int &client, Handle recipients, char[] name, char[] 
 		char cMessage[MAXLENGTH_INPUT];
 		Format(cMessage, MAXLENGTH_INPUT, "%s", g_ChatPrefix[RankByIndex(g_PlayersRank[client], client)]);
 		CFormat(cMessage, MAXLENGTH_INPUT);
-		Format(name, MAXLENGTH_INPUT, "%s%s", cMessage, name)
+		Format(name, MAXLENGTH_INPUT, "%s%s", cMessage, name);
 		return Plugin_Changed;
 	}
-	return Plugin_Continue;
+	return Plugin_Changed;
 }
 
 public void OnMapStart() {

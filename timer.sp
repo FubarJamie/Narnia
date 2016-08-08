@@ -3,8 +3,10 @@
 #include <sdktools>
 #include <sdkhooks>
 #include <smlib>
-#include <scp>
 
+#include "include/scp"
+#include "include/donate-core"
+#include "include/store"
 #include "vars"
 #include "events"
 #include "timers"

@@ -7,8 +7,19 @@ public Action Command_Profile(int client, int args) {
 	
 	char displayStr[128];
 	
-	Format(displayStr, sizeof(displayStr), "Points: %i\n", g_PlayersPoints);
-	Format(displayStr, sizeof(displayStr), "Rank: %i", g_PlayersRank);
+	Format(displayStr, sizeof(displayStr), "Credits: %i\n", Store_GetClientCredits(client) );
+	
+	AddMenuItem(menu, "-1", displayStr, ITEMDRAW_DISABLED);
+	
+	int DonateTime = Donate_GetTime(client);
+	
+	if (DonateTime == -1) {
+		Format(displayStr, sizeof(displayStr), "VIP Time: no.\n");
+	} else {
+		Format(displayStr, sizeof(displayStr), "VIP Time: %i\n", DonateTime);
+	}
+	
+	Format(displayStr, sizeof(displayStr), "VIP Time: %i\n", Donate_GetTime(client));
 	
 	AddMenuItem(menu, "-1", displayStr, ITEMDRAW_DISABLED);
 	
