@@ -37,7 +37,6 @@ public void OnPluginStart() {
 	g_offsCollisionGroup = FindSendPropOffs("CBaseEntity", "m_CollisionGroup");
 	
 	LoadRanks();
-	FixPush();
 	
 	SQL_DBConnect();
 	GetCurrentMap(g_Map, 128);
@@ -63,6 +62,7 @@ public void OnPluginStart() {
 	HookEvent("player_connect", Player_Connect, EventHookMode_Pre);
 	HookEvent("player_disconnect", Player_Disconnect, EventHookMode_Pre);
 	HookEvent("round_start", Event_RoundStart);
+	HookEvent("round_start", Pushfix_Event_RoundStart);
 	
 	CreateTimer(0.1, UpdateHUD_Timer, INVALID_HANDLE, TIMER_REPEAT);
 	CreateTimer(1.0, JumpCheck_Timer, INVALID_HANDLE, TIMER_REPEAT);
@@ -358,6 +358,13 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 		TeleportEntity(client, g_lastPos[client], NULL_VECTOR, fVel);
 	}
 
+	if(InsideZoneByType(client, Zone_PushFix))
+	{
+		gB_Pushfix[client] = true;
+	}else
+	{
+		gB_Pushfix[client] = false;
+	}
 	/*************************************************************************************************************************************************************************
 																					Custom
 	*************************************************************************************************************************************************************************/

@@ -104,6 +104,9 @@ int g_CurrentButtons[MAXPLAYERS + 1];
 
 // Stats Variables
 
+//pushfix
+bool gB_Pushfix[MAXPLAYERS+1];
+
 
 // WR Variables
 

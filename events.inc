@@ -9,7 +9,7 @@ public void OnPlayerConnect(int client, bool connectMessage) {
 }
 
 public Action Event_RoundStart(Handle event, const char[] name, bool dontBroadcast) {
-    FixPush();
+    //FixPush();
 }
 
 public Action Player_Spawned(Event event, const char[] name, bool dontBroadcast) {
@@ -161,7 +161,7 @@ public void OnMapStart() {
 	g_BeamSprite = PrecacheModel("materials/sprites/laserbeam.vmt");
 	g_HaloSprite = PrecacheModel("materials/sprites/halo01.vmt");
 	RefreshZones();
-	
+	Pushfix_OnMapStart();
 	UpdateWRCache();
 	GetCurrentRecords();
 	
