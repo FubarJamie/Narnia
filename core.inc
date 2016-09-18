@@ -104,7 +104,7 @@ public void SQL_DBConnect() {
 		SQL_FastQuery(g_SQLhandle, "SET NAMES 'utf8';");
 		SQL_UnlockDatabase(g_SQLhandle);
 		// Users table
-		SQL_TQuery(g_SQLhandle, SQL_CreateTable_Callback, "CREATE TABLE IF NOT EXISTS `users` (`auth` VARCHAR(64) NOT NULL, `name` VARCHAR(32), `country` VARCHAR(45), `ip` VARCHAR(32), PRIMARY KEY (`auth`));");
+		SQL_TQuery(g_SQLhandle, SQL_CreateTable_Callback, "CREATE TABLE IF NOT EXISTS `users` (`auth` VARCHAR(64) NOT NULL, `name` VARCHAR(32), `country` VARCHAR(45), `ip` VARCHAR(32), `playtime` INT, PRIMARY KEY (`auth`));");
 		// Times table
 		SQL_TQuery(g_SQLhandle, SQL_CreateTable_Callback, "CREATE TABLE IF NOT EXISTS `playertimes` (`id` INT NOT NULL AUTO_INCREMENT, `auth` VARCHAR(64), `map` VARCHAR(128), `time` FLOAT, `jumps` VARCHAR(32), `style` VARCHAR(32), `date` DATE, PRIMARY KEY (`id`));");
 		// Time bonus table

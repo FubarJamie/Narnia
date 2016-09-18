@@ -208,5 +208,9 @@ char g_ChatPrefix[100][64];
 bool g_Hide[MAXPLAYERS+1] = {false, ...};
 bool g_HideHud[MAXPLAYERS + 1] =  { false, ... };
 
+int epoch[MAXPLAYERS + 1] = { 0, ... };
+int curPlayTime[MAXPLAYERS+1] = { 0, ... };
+char g_PlayerAuth[MAXPLAYERS+1][64];
+
 //cvars
 ConVar gCv_prespeed = null;

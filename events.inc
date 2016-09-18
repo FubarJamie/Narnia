@@ -49,17 +49,6 @@ public Action Player_Spawned(Event event, const char[] name, bool dontBroadcast)
 }
 
 public Action Player_Disconnect(Event event, const char[] name, bool dontBroadcast) {
-
-	/*int client = GetClientOfUserId(GetEventInt(event, "userid"));
-	
-	char reason[64], Gname[32], networkId[22];
-	
-	GetEventString(event, "reason", reason, 64);
-	GetEventString(event, "name", Gname, 32);
-	GetEventString(event, "networkid", networkId, 22);
-	
-	CPrintToChatAll("{YELLOW}[{RED}Disconnect{YELLOW}] {DEFAULT}- {BLUE}%N{DEFAULT} has left the server with {BLUE}%i{DEFAULT} points! Reason: {PURPLE}%s", client, g_PlayersPoints[client], reason);
-	*/
 	
 	int client = GetClientOfUserId(GetEventInt(event, "userid"));
 	
@@ -96,6 +85,9 @@ public void OnClientDisconnect(int client) {
 	
 	g_PlayersPoints[client] = 0;
 	g_PlayersRank[client] = 0;
+
+	Client_SaveTime(client);
+	
 	
 	//CPrintToChatAll("{YELLOW}[{RED}Disconnect{YELLOW}] {DEFAULT}- {BLUE}%N{DEFAULT} has left the server with {BLUE}%i{DEFAULT} points!", client, g_PlayersPoints[client]);
 	
@@ -111,6 +103,8 @@ public void OnClientPostAdminCheck(int client) {
 }
 
 public void OnClientPutInServer(int client) {
+
+	Client_GetTime(client);
 
 	g_Hide[client] = false; 
 	SDKHook(client, SDKHook_SetTransmit, Hook_SetTransmit); 
@@ -130,6 +124,14 @@ public void OnClientPutInServer(int client) {
 	GetRLPosWR(client, fTime, view_as<int>(g_CurrentStyle[client]));
 	GetPosWR(client, view_as<int>(g_CurrentStyle[client]));
 	Timer_GetMaxWR(view_as<int>(g_CurrentStyle[client]));
+	
+	epoch[client] = GetTime();
+	Client_GetTime(client);
+	
+	char auth[64];
+	GetClientAuthId(client, AuthId_SteamID64, auth, 64);
+
+	FormatEx(g_PlayerAuth[client], 64, "%s", auth);
 
 }
 
@@ -263,7 +265,7 @@ public void OnClientInServer(int client) {
 		FormatEx(sCountry, 45, "Local Area Network");
 
 	char sQuery[512];
-	FormatEx(sQuery, 512, "REPLACE INTO users (auth, name, country, ip) VALUES ('%s', '%s', '%s', '%s');", sAuthID3, sEscapedName, sCountry, sIP);
+	FormatEx(sQuery, 512, "REPLACE INTO users (auth, name, country, ip, playtime) VALUES ('%s', '%s', '%s', '%s', (SELECT `playtime` FROM ( select * from `users`) as x WHERE auth = '%s'));", sAuthID3, sEscapedName, sCountry, sIP, sAuthID3);
 
 	SQL_TQuery(g_SQLhandle, SQL_InsertUser_Callback, sQuery, GetClientSerial(client));
 	#if defined SQL_DEBUG

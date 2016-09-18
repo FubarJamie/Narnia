@@ -47,6 +47,9 @@ public void OnPluginStart() {
 			OnClientPutInServer(i);
 			g_ExtraLife[i] = true;
 		}
+		
+		// /Servers/Bunnyhop/csgo/addons/sourcemod/plugins
+		// /Servers/Bunnyhop/csgo/addons/sourcemod/plugins/
 	}
 	
 	//g_BulletPositions = CreateArray(3);
@@ -178,6 +181,24 @@ public void OnPluginStart() {
 	
 	AutoExecConfig();
 	//gB_ZoneStyle = GetConVarBool(gCV_ZoneStyle);
+	
+	for (int i = 1; i < MaxClients; i++) {
+		if (!IsValidClient(i))
+			continue;
+		
+		Client_GetTime(i);
+	}
+	
+}
+
+public void OnPluginEnd() {
+
+	for (int i = 1; i < MaxClients; i++) {
+		if (!IsValidClient(i))
+			continue;
+		Client_SaveTime(i);
+	}
+
 }
 
 public Action Command_HidePlayers(int client, int args) {

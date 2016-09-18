@@ -4,6 +4,7 @@
 #define _store_included
 
 new g_cvarChatTag = -1;
+
 #define CHAT_TAG g_eCvars[g_cvarChatTag][sCache]
 
 #define ITEM_NAME_LENGTH 64
